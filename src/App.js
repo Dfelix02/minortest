@@ -77,7 +77,12 @@ function App() {
         <Search style={{ padding: "20px" }} searchUser={filterUsers} />
       </Container>
       {filterUser.length > 0 ? (
-        <Card.Group fluid="true" itemsPerRow={4} style={{ margin: "10px" }}>
+        <Card.Group
+          centered
+          fluid="true"
+          style={{ margin: "10px" }}
+          className="card-grid"
+        >
           {filterUser.map((user) => {
             return (
               <UserCard
