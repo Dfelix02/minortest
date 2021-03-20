@@ -1,23 +1,72 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+import UserCard from "./components/UserCard";
+import Search from "./components/Search";
+import { Card, Container, Image } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
 
 function App() {
+  const [users, setUsers] = useState([]);
+  const [filterUser, setFilterUser] = useState([]);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((ans) => ans.json())
+      .then((userInfo) => {
+        const listOfUsers = userInfo.map((user) => {
+          user.image = `https://avatars.dicebear.com/v2/avataaars/{${user.username}}.svg?options[mood][]=happy`;
+          return user;
+        });
+        setUsers(listOfUsers);
+        setFilterUser(listOfUsers);
+      });
+  }, []);
+
+  const deleteUser = (id) => {
+    const newUsers = filterUser.filter((user) => user.id !== id);
+    setFilterUser(newUsers);
+  };
+
+  const filterUsers = (searchedName) => {
+    const newUsers = users.filter((user) =>
+      user.name.toLowerCase().includes(searchedName.toLowerCase())
+    );
+    setFilterUser(newUsers);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container style={{ padding: "10px", margin: "10px" }}>
+        <Search style={{ padding: "20px" }} searchUser={filterUsers} />
+      </Container>
+      {filterUser.length > 0 ? (
+        <Container style={{ padding: "10px", margin: "10px" }}>
+          <Card.Group fluid="true">
+            {filterUser.map((user) => {
+              return (
+                <UserCard
+                  key={user.username}
+                  id={user.id}
+                  image={user.image}
+                  name={user.name}
+                  email={user.email}
+                  phone={user.phone}
+                  website={user.website}
+                  deleteUser={deleteUser}
+                />
+              );
+            })}
+          </Card.Group>
+        </Container>
+      ) : (
+        <Container style={{ padding: "10px", margin: "10px" }}>
+          <Image
+            src="https://media2.giphy.com/media/tvGOBZKNEX0ac/200.gif"
+            style={{ width: "81.5%" }}
+          />
+          No Users Found
+        </Container>
+      )}
     </div>
   );
 }
