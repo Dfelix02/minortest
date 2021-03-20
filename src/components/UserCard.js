@@ -98,8 +98,8 @@ function UserCard({
           </Card.Description>
         </Card.Content>
       ) : (
-        <Card>
-          <Image src={image} />
+        <Card style={{ width: "100%" }}>
+          <Image src={image} wrapped ui={false} />
           <Card.Content>
             <Card.Header>{myName}</Card.Header>
             <Card.Description>

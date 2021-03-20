@@ -77,28 +77,26 @@ function App() {
         <Search style={{ padding: "20px" }} searchUser={filterUsers} />
       </Container>
       {filterUser.length > 0 ? (
-        <Container style={{ padding: "10px", margin: "10px" }}>
-          <Card.Group fluid="true">
-            {filterUser.map((user) => {
-              return (
-                <UserCard
-                  key={user.username}
-                  id={user.id}
-                  image={user.image}
-                  name={user.name}
-                  email={user.email}
-                  phone={user.phone}
-                  website={user.website}
-                  deleteUser={deleteUser}
-                  editUserName={editUserName}
-                  editUserEmail={editUserEmail}
-                  editUserPhone={editUserPhone}
-                  editUserWebsite={editUserWebsite}
-                />
-              );
-            })}
-          </Card.Group>
-        </Container>
+        <Card.Group fluid="true" itemsPerRow={4} style={{ margin: "10px" }}>
+          {filterUser.map((user) => {
+            return (
+              <UserCard
+                key={user.username}
+                id={user.id}
+                image={user.image}
+                name={user.name}
+                email={user.email}
+                phone={user.phone}
+                website={user.website}
+                deleteUser={deleteUser}
+                editUserName={editUserName}
+                editUserEmail={editUserEmail}
+                editUserPhone={editUserPhone}
+                editUserWebsite={editUserWebsite}
+              />
+            );
+          })}
+        </Card.Group>
       ) : (
         <Container style={{ padding: "10px", margin: "10px" }}>
           <Image
