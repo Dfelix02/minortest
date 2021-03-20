@@ -2,7 +2,19 @@ import React, { useState } from "react";
 import { Card, Icon, Image, Button, Form } from "semantic-ui-react";
 import "../css/UserCard.css";
 
-function UserCard({ id, name, email, phone, website, image, deleteUser }) {
+function UserCard({
+  id,
+  name,
+  email,
+  phone,
+  website,
+  image,
+  deleteUser,
+  editUserName,
+  editUserEmail,
+  editUserPhone,
+  editUserWebsite,
+}) {
   const [liked, setLiked] = useState(false);
   const [edit, setEdit] = useState(false);
   const [myName, setMyName] = useState(name);
@@ -13,6 +25,18 @@ function UserCard({ id, name, email, phone, website, image, deleteUser }) {
   const changeInfo = (e) => {
     e.preventDefault();
     setEdit(!edit);
+    if (e.target.name !== name) {
+      editUserName(id, e.target.name.value);
+    }
+    if (e.target.email !== email) {
+      editUserEmail(id, e.target.email.value);
+    }
+    if (e.target.phone !== phone) {
+      editUserPhone(id, e.target.phone.value);
+    }
+    if (e.target.website !== website) {
+      editUserWebsite(id, e.target.website.value);
+    }
   };
   const changeName = (e) => {
     setMyName(e.target.value);
@@ -35,21 +59,37 @@ function UserCard({ id, name, email, phone, website, image, deleteUser }) {
             <Form onSubmit={changeInfo}>
               <Form.Field>
                 <label>Name</label>
-                <input name="name" value={myName} onChange={changeName} />
+                <input
+                  name="name"
+                  value={myName}
+                  required
+                  onChange={changeName}
+                />
               </Form.Field>
               <Form.Field>
                 <label>Email</label>
-                <input name="email" value={myEmail} onChange={changeEmail} />
+                <input
+                  name="email"
+                  value={myEmail}
+                  required
+                  onChange={changeEmail}
+                />
               </Form.Field>
               <Form.Field>
                 <label>Phone Number</label>
-                <input name="phone" value={myPhone} onChange={changePhone} />
+                <input
+                  name="phone"
+                  value={myPhone}
+                  required
+                  onChange={changePhone}
+                />
               </Form.Field>
               <Form.Field>
                 <label>Website</label>
                 <input
                   name="website"
                   value={myWebsite}
+                  required
                   onChange={changeWebsite}
                 />
               </Form.Field>

@@ -33,6 +33,43 @@ function App() {
     );
     setFilterUser(newUsers);
   };
+  const editUserName = (id, edit) => {
+    const newUsers = filterUser.map((user) => {
+      if (user.id === id) {
+        user.name = edit;
+      }
+      return user;
+    });
+    setFilterUser(newUsers);
+  };
+  const editUserEmail = (id, edit) => {
+    const newUsers = filterUser.map((user) => {
+      if (user.id === id) {
+        user.email = edit;
+      }
+      return user;
+    });
+    setFilterUser(newUsers);
+  };
+
+  const editUserPhone = (id, edit) => {
+    const newUsers = filterUser.map((user) => {
+      if (user.id === id) {
+        user.phone = edit;
+      }
+      return user;
+    });
+    setFilterUser(newUsers);
+  };
+  const editUserWebsite = (id, edit) => {
+    const newUsers = filterUser.map((user) => {
+      if (user.id === id) {
+        user.website = edit;
+      }
+      return user;
+    });
+    setFilterUser(newUsers);
+  };
 
   return (
     <div className="App">
@@ -53,6 +90,10 @@ function App() {
                   phone={user.phone}
                   website={user.website}
                   deleteUser={deleteUser}
+                  editUserName={editUserName}
+                  editUserEmail={editUserEmail}
+                  editUserPhone={editUserPhone}
+                  editUserWebsite={editUserWebsite}
                 />
               );
             })}
