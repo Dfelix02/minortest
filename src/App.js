@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import UserCard from "./components/UserCard";
 import Search from "./components/Search";
-import { Card, Container, Image } from "semantic-ui-react";
+import { Container, Grid, Image } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 
 function App() {
@@ -77,31 +77,28 @@ function App() {
         <Search style={{ padding: "20px" }} searchUser={filterUsers} />
       </Container>
       {filterUser.length > 0 ? (
-        <Card.Group
-          centered
-          fluid="true"
-          style={{ margin: "10px" }}
-          className="card-grid"
-        >
+        <Grid columns={4} stackable stretched>
           {filterUser.map((user) => {
             return (
-              <UserCard
-                key={user.username}
-                id={user.id}
-                image={user.image}
-                name={user.name}
-                email={user.email}
-                phone={user.phone}
-                website={user.website}
-                deleteUser={deleteUser}
-                editUserName={editUserName}
-                editUserEmail={editUserEmail}
-                editUserPhone={editUserPhone}
-                editUserWebsite={editUserWebsite}
-              />
+              <Grid.Column stackable key={user.id}>
+                <UserCard
+                  key={user.username}
+                  id={user.id}
+                  image={user.image}
+                  name={user.name}
+                  email={user.email}
+                  phone={user.phone}
+                  website={user.website}
+                  deleteUser={deleteUser}
+                  editUserName={editUserName}
+                  editUserEmail={editUserEmail}
+                  editUserPhone={editUserPhone}
+                  editUserWebsite={editUserWebsite}
+                />
+              </Grid.Column>
             );
           })}
-        </Card.Group>
+        </Grid>
       ) : (
         <Container style={{ padding: "10px", margin: "10px" }}>
           <Image

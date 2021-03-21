@@ -52,7 +52,7 @@ function UserCard({
   };
 
   return (
-    <Card>
+    <Card style={{ width: "100%" }}>
       {edit ? (
         <Card.Content>
           <Card.Description>
@@ -98,7 +98,7 @@ function UserCard({
           </Card.Description>
         </Card.Content>
       ) : (
-        <Card style={{ width: "100%" }}>
+        <Card style={{ width: "100%", height: "100%" }}>
           <Image src={image} wrapped ui={false} />
           <Card.Content>
             <Card.Header>{myName}</Card.Header>
@@ -115,22 +115,32 @@ function UserCard({
               {myWebsite}
             </Card.Description>
           </Card.Content>
-          <Card.Content extra>
-            <Button.Group fluid>
-              <Button
-                color="grey"
-                className={liked && "like"}
-                onClick={() => setLiked(!liked)}
-              >
-                <Icon name="heart" />
-              </Button>
-              <Button color="grey" onClick={() => setEdit(!edit)}>
-                <Icon name="edit" />
-              </Button>
-              <Button color="grey" onClick={() => deleteUser(id)}>
-                <Icon name="trash" />
-              </Button>
-            </Button.Group>
+          <Card.Content
+            extra
+            style={{
+              width: "100%",
+              textAlign: "center",
+            }}
+          >
+            <Icon
+              basic
+              name="heart"
+              className={liked && "like"}
+              onClick={() => setLiked(!liked)}
+              style={{ cursor: "pointer", float: "left" }}
+            />
+
+            <Icon
+              name="edit"
+              onClick={() => setEdit(!edit)}
+              style={{ cursor: "pointer" }}
+            />
+
+            <Icon
+              name="trash"
+              onClick={() => deleteUser(id)}
+              style={{ cursor: "pointer", float: "right" }}
+            />
           </Card.Content>
         </Card>
       )}
